@@ -39,8 +39,7 @@ func PrintInfo(i *Release) {
 	fmt.Println("Runtime:", i.Runtime)
 	fmt.Println("Architecture:", i.Arch)
 	fmt.Println("OS Name:", i.Name)
-	fmt.Println("Major Version:", i.MajorVersion)
-	fmt.Println("Minor Version:", i.MinorVersion)
+	fmt.Println("Version:", i.Version)
 
 	if i.Runtime == "freebsd" {
 		fmt.Println("Kernel:", i.bsd.Kernel)
