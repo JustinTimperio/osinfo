@@ -21,7 +21,7 @@ func GetVersion() *Release {
 	inf.nix.Kernel = string(kern)
 
 	if pathExists("/etc/os-release") == true {
-		f := readFile("/home/justin/Repos/Shell/nixinfo/release-info/arch/etc/os-release")
+		f := readFile("/etc/os-release")
 
 		var (
 			name_field  = regexp.MustCompile(`NAME=(.*?)\n|\nNAME=(.*?)\n`)
