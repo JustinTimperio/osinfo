@@ -41,7 +41,7 @@ type DarwinRelease struct {
    package main
 
    import (
-	   "github.com/JustinTimperio/osinfo
+	   "github.com/JustinTimperio/osinfo"
    )
 
    func main() {
