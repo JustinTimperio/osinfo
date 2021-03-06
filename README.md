@@ -10,42 +10,24 @@ OSinfo is a cross-platform OS Version collection tool. It is designed to unify m
 
 ### Offically Supported:
 
-Windows Based: 
-  - Windows Server 2012
-  - Windows Server 2016
-  - Windows Server 2019
-  - Windows 7
-  - Windows 8
-  - Windows 10
-
-Debian Linux Based:
-  - Ubuntu
-  - Debian
-  - MX
-  - Mint
-  - Kali Rolling
-  - Parrot OS
-
-Red Hat Linux Based:
-  - Fedora
-  - CentOS
-  - RHEL
-  - Oracle
-
-OpenSUSE Linux Based:
-  - Leap
-  - TumbleWeed
-  - SLES
-
-Arch Linux Based:
-  - Arch
-  - Manjaro
-
-Alpine Linux Based:
- - Alpine
-
-BSD Based:
-  - FreeBSD
+| Windows             | MacOS              | Linux               | BSD     | Android         | IOS    |
+|---------------------|--------------------|---------------------|---------|-----------------|--------|
+| Windows Server 2012 | 10 - Snow Leopard  | Ubuntu              | FreeBSD | 5 - Lollipop    | IOS 10 |
+| Windows Server 2016 | 11 - Lion          | Debian              | OpenBSD | 6 - Marshmallow | IOS 11 |
+| Windows Server 2019 | 12 - Mountain Lion | MXLinux             |         | 7 - Nougat      | IOS 12 |
+| Windows 7           | 13 - Mavericks     | Mint                |         | 8 - Oreo        | IOS 13 |
+| Windows 8           | 14 - Yosemite      | Kali                |         | 9 - Pie         | IOS 14 |
+| Windows 10          | 15 - El Capitan    | ParrotOS            |         |                 |        |
+|                     | 16 - Sierra        | OpenSUSE Leap       |         |                 |        |
+|                     | 17 - High Sierra   | OpenSUSE TumbleWeed |         |                 |        |
+|                     | 18 - Mojave        | OpenSUSE SLES       |         |                 |        |
+|                     | 19 - Catalina      | Arch                |         |                 |        |
+|                     | 18 - Big Sur       | Manjaro             |         |                 |        |
+|                     |                    | Alpine              |         |                 |        |
+|                     |                    | Fedora              |         |                 |        |
+|                     |                    | RHEL                |         |                 |        |
+|                     |                    | CentOS              |         |                 |        |
+|                     |                    | Oracle              |         |                 |        |
 
 ## Release Struct
 ```go
