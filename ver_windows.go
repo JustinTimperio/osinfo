@@ -2,6 +2,7 @@ package osinfo
 
 import (
 	"runtime"
+	"strconv"
 
 	"golang.org/x/sys/windows/registry"
 )
@@ -32,21 +33,21 @@ func GetVersion() *Release {
 	defer k.Close()
 
 	// extract info
-	pname, _, err = k.GetStringValue("ProductName")
+	pname, _, err := k.GetStringValue("ProductName")
 	if err != nil {
 		inf.Name = "unknown"
 	} else {
 		inf.Name = pname
 	}
 
-	ver, _, err = k.GetIntegerValue("CurrentMajorVersionNumber")
+	ver, _, err := k.GetIntegerValue("CurrentMajorVersionNumber")
 	if err != nil {
 		inf.Version = "unknown"
 	} else {
-		inf.Version = ver
+		inf.Version = strconv.Itoa(int(ver))
 	}
 
-	build, _, err = k.GetStringValue("CurrentBuild")
+	build, _, err := k.GetStringValue("CurrentBuild")
 	if err != nil {
 		inf.win.Build = "unknown"
 	} else {
