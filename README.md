@@ -76,12 +76,11 @@ type darwinRelease struct {
 ```
 
 ## Example Usage
+1. Create`fetchinfo.go`
 ```go
    package main
 
    import (
-     "fmt"
-
 	   "github.com/JustinTimperio/osinfo"
    )
 
@@ -90,6 +89,9 @@ type darwinRelease struct {
 		release.PrintInfo()
 	 }
 ```
+2. `go mod init`
+3. `go mod tidy`
+4. `go run fetchinfo.go`
 
 ## Example Outputs
 ```
