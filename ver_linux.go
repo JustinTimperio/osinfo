@@ -9,7 +9,18 @@ import (
 	"strings"
 )
 
+// GetVersion Linux returns version info
 func GetVersion() *Release {
+	// fetching os info for linux distros is more complicated process than it should be
+	// version information is collected via `uname` and `/etc/os-release`
+	// Returns:
+	//		- r.Runtime
+	//		- r.Arch
+	//		- r.Name
+	//		- r.Version
+	//		- r.nix.Kernel
+	//		- r.nix.Distro
+	//		- r.nix.PkgMng
 
 	inf := &Release{
 		Runtime: runtime.GOOS,
@@ -24,9 +35,9 @@ func GetVersion() *Release {
 		f := readFile("/etc/os-release")
 
 		var (
-			name_field  = regexp.MustCompile(`NAME=(.*?)\n|\nNAME=(.*?)\n`)
-			pname_field = regexp.MustCompile(`PRETTY_NAME=(.*?)\n|\nPRETTY_NAME=(.*?)\n`)
-			ver_field   = regexp.MustCompile(`VERSION_ID=(.*?)\n|\nVERSION_ID=(.*?)\n`)
+			nameField  = regexp.MustCompile(`NAME=(.*?)\n|\nNAME=(.*?)\n`)
+			pnameField = regexp.MustCompile(`PRETTY_NAME=(.*?)\n|\nPRETTY_NAME=(.*?)\n`)
+			verField   = regexp.MustCompile(`VERSION_ID=(.*?)\n|\nVERSION_ID=(.*?)\n`)
 
 			suse   = regexp.MustCompile(`SLES|openSUSE`)
 			debian = regexp.MustCompile(`Debian|Ubuntu|Kali|Parrot`)
@@ -35,20 +46,20 @@ func GetVersion() *Release {
 			alpine = regexp.MustCompile(`Alpine`)
 		)
 
-		name_f := strings.TrimSpace(strings.ReplaceAll(strings.ReplaceAll(name_field.FindString(f), "\n", ""), "\"", ""))
-		pname_f := strings.TrimSpace(strings.ReplaceAll(strings.ReplaceAll(pname_field.FindString(f), "\n", ""), "\"", ""))
-		ver_f := strings.TrimSpace(strings.ReplaceAll(strings.ReplaceAll(ver_field.FindString(f), "\n", ""), "\"", ""))
+		namef := strings.TrimSpace(strings.ReplaceAll(strings.ReplaceAll(nameField.FindString(f), "\n", ""), "\"", ""))
+		pnamef := strings.TrimSpace(strings.ReplaceAll(strings.ReplaceAll(pnameField.FindString(f), "\n", ""), "\"", ""))
+		verf := strings.TrimSpace(strings.ReplaceAll(strings.ReplaceAll(verField.FindString(f), "\n", ""), "\"", ""))
 
-		name := strings.Split(name_f, "=")[1]
+		name := strings.Split(namef, "=")[1]
 
-		if pname_f != "" {
-			inf.Name = strings.Split(pname_f, "=")[1]
+		if pnamef != "" {
+			inf.Name = strings.Split(pnamef, "=")[1]
 		} else {
 			inf.Name = "unknown"
 		}
 
-		if ver_f != "" {
-			inf.Version = strings.Split(ver_f, "=")[1]
+		if verf != "" {
+			inf.Version = strings.Split(verf, "=")[1]
 		} else {
 			inf.Version = "unknown"
 		}

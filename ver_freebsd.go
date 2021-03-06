@@ -6,7 +6,16 @@ import (
 	"strings"
 )
 
+// GetVersion FreeBSD returns version info
 func GetVersion() *Release {
+	// fetching info for this os is fairly simple
+	// version information is all fetched via `uname`
+	// Returns:
+	//		- r.Runtime
+	//		- r.Arch
+	//		- r.Name
+	//		- r.Version
+	//		- r.bsd.Kernel
 
 	inf := &Release{
 		Runtime: runtime.GOOS,

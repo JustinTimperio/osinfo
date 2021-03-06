@@ -4,36 +4,38 @@ import (
 	"fmt"
 )
 
+// Release contains all the
 type Release struct {
 	Runtime string
 	Arch    string
 	Name    string
 	Version string
-	win     WindowsRelease
-	nix     LinuxRelease
-	bsd     BSDRelease
-	osx     DarwinRelease
+	win     windowsRelease
+	nix     linuxRelease
+	bsd     bsdRelease
+	osx     darwinRelease
 }
 
-type WindowsRelease struct {
+type windowsRelease struct {
 	Build string
 }
 
-type LinuxRelease struct {
+type linuxRelease struct {
 	Distro string
 	Kernel string
 	PkgMng string
 }
 
-type BSDRelease struct {
+type bsdRelease struct {
 	Kernel string
 	PkgMng string
 }
 
-type DarwinRelease struct {
+type darwinRelease struct {
 	Kernel string
 }
 
+// PrintInfo prints all the fields in a release struct
 func (i *Release) PrintInfo() {
 
 	fmt.Println("Runtime:", i.Runtime)

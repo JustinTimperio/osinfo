@@ -2,9 +2,20 @@ package osinfo
 
 import (
 	"runtime"
+
+	"golang.org/x/sys/windows/registry"
 )
 
+// GetVersion Windows returns version info
 func GetVersion() *Release {
+	// fetching os info for modern windows versions is fairly simple
+	// version info is easily fetched in the registry
+	// Returns:
+	//		- r.Runtime
+	//		- r.Arch
+	//		- r.Name
+	//		- r.Version
+	//		- r.win.Build
 
 	inf := &Release{
 		Runtime: runtime.GOOS,

@@ -1,18 +1,14 @@
 package osinfo
 
-import (
-	"fmt"
+import "fmt"
 
-	"github.com/JusinTimperio/osinfo"
-)
-
-func ExampleStruct() {
-	release := osinfo.GetVersion()
-	fmt.Println(release.Name)
-	fmt.Println(release.Version)
-}
-
-func ExamplePrint() {
-	release := osinfo.GetVersion()
-	release.PrintInfo()
+func fetchAndPrint() {
+	x := GetVersion()
+	fmt.Println("-------------")
+	fmt.Println(x.Arch)
+	fmt.Println(x.Runtime)
+	fmt.Println(x.Name)
+	fmt.Println(x.Version)
+	fmt.Println("-------------")
+	x.PrintInfo()
 }
