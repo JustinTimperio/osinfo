@@ -1,7 +1,7 @@
 # osinfo
 
 ## What is osinfo?
-OSinfo is a cross-platform OS Version collection tool module. It is designed to unify OS detection methods in a single module that can easily be integrated into other projects. 
+OSinfo is a cross-platform OS Version collection tool. It is designed to unify multiple OS detection methods in a single module that can easily be integrated into other projects. 
 
 ### Offically Supported
 
