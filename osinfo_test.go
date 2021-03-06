@@ -1,9 +1,15 @@
-package osinfo
+package osinfo_test
 
-import "fmt"
+import (
+	"fmt"
+	"testing"
 
-func fetchAndPrint() {
-	x := GetVersion()
+	"github.com/JustinTimperio/osinfo"
+)
+
+
+func TestMain(m *testing.M) {
+	x := osinfo.GetVersion()
 	fmt.Println("-------------")
 	fmt.Println(x.Arch)
 	fmt.Println(x.Runtime)
