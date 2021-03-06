@@ -40,7 +40,7 @@ func GetVersion() *Release {
 			verField   = regexp.MustCompile(`VERSION_ID=(.*?)\n|\nVERSION_ID=(.*?)\n`)
 
 			suse   = regexp.MustCompile(`SLES|openSUSE`)
-			debian = regexp.MustCompile(`Debian|Ubuntu|Kali|Parrot`)
+			debian = regexp.MustCompile(`Debian|Ubuntu|Kali|Parrot|Mint`)
 			rhl    = regexp.MustCompile(`Red Hat|CentOS|Fedora|Oracle`)
 			arch   = regexp.MustCompile(`Arch|Manjaro`)
 			alpine = regexp.MustCompile(`Alpine`)
