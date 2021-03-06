@@ -55,22 +55,22 @@ type Release struct {
 	osx     DarwinRelease
 }
 
-type WindowsRelease struct {
+type windowsRelease struct {
 	Build string
 }
 
-type LinuxRelease struct {
+type linuxRelease struct {
 	Distro string
 	Kernel string
 	PkgMng string
 }
 
-type BSDRelease struct {
+type bsdRelease struct {
 	Kernel string
 	PkgMng string
 }
 
-type DarwinRelease struct {
+type darwinRelease struct {
 	Kernel string
 }
 ```
