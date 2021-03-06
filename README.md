@@ -11,6 +11,7 @@ OSinfo is a cross-platform OS Version collection tool. It is designed to unify m
 ### Offically Supported
 
 Windows Based: 
+  - Windows Server 2012
   - Windows Server 2016
   - Windows Server 2019
   - Windows 7
