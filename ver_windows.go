@@ -8,15 +8,15 @@ import (
 )
 
 // GetVersion Windows returns version info
+// fetching os info for modern windows versions is fairly simple
+// version info is easily fetched in the registry
+// Returns:
+//		- r.Runtime
+//		- r.Arch
+//		- r.Name
+//		- r.Version
+//		- r.win.Build
 func GetVersion() *Release {
-	// fetching os info for modern windows versions is fairly simple
-	// version info is easily fetched in the registry
-	// Returns:
-	//		- r.Runtime
-	//		- r.Arch
-	//		- r.Name
-	//		- r.Version
-	//		- r.win.Build
 
 	inf := &Release{
 		Runtime: runtime.GOOS,
@@ -36,23 +36,20 @@ func GetVersion() *Release {
 	pname, _, err := k.GetStringValue("ProductName")
 	if err != nil {
 		inf.Name = "unknown"
-	} else {
-		inf.Name = pname
 	}
+	inf.Name = pname
 
 	ver, _, err := k.GetIntegerValue("CurrentMajorVersionNumber")
 	if err != nil {
 		inf.Version = "unknown"
-	} else {
-		inf.Version = strconv.Itoa(int(ver))
 	}
+	inf.Version = strconv.Itoa(int(ver))
 
 	build, _, err := k.GetStringValue("CurrentBuild")
 	if err != nil {
 		inf.win.Build = "unknown"
-	} else {
-		inf.win.Build = build
 	}
+	inf.win.Build = build
 
 	return inf
 }

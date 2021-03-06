@@ -10,17 +10,17 @@ import (
 )
 
 // GetVersion Linux returns version info
+// fetching os info for linux distros is more complicated process than it should be
+// version information is collected via `uname` and `/etc/os-release`
+// Returns:
+//		- r.Runtime
+//		- r.Arch
+//		- r.Name
+//		- r.Version
+//		- r.nix.Kernel
+//		- r.nix.Distro
+//		- r.nix.PkgMng
 func GetVersion() *Release {
-	// fetching os info for linux distros is more complicated process than it should be
-	// version information is collected via `uname` and `/etc/os-release`
-	// Returns:
-	//		- r.Runtime
-	//		- r.Arch
-	//		- r.Name
-	//		- r.Version
-	//		- r.nix.Kernel
-	//		- r.nix.Distro
-	//		- r.nix.PkgMng
 
 	inf := &Release{
 		Runtime: runtime.GOOS,
