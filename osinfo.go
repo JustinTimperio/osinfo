@@ -34,7 +34,7 @@ type DarwinRelease struct {
 	Kernel string
 }
 
-func PrintInfo(i *Release) {
+func (i *Release) PrintInfo() {
 
 	fmt.Println("Runtime:", i.Runtime)
 	fmt.Println("Architecture:", i.Arch)
