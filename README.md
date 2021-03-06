@@ -41,19 +41,23 @@ type DarwinRelease struct {
    package main
 
    import (
+     "fmt"
+
 	   "github.com/JustinTimperio/osinfo"
    )
 
    func main() {
-		Release := osinfo.GetVersion()
-		Release.PrintInfo()
+		release := osinfo.GetVersion()
+    fmt.Println(release.Name)
+    fmt.Println(release.Version)
+		release.PrintInfo()
 	 }
-}
 ```
 
-## Example Output
+## Example Outputs
 ```
 --------------------
+
 Runtime: linux
 Architecture: amd64
 OS Name: Arch Linux
@@ -63,6 +67,7 @@ Distro: arch
 Package Manager: pacman
 
 --------------------
+
 Runtime: linux
 Architecture: amd64
 OS Name: Debian GNU/Linux 10 (buster)
@@ -72,6 +77,7 @@ Distro: debian
 Package Manager: apt
 
 --------------------
+
 Runtime: windows
 Architecture: amd64
 OS Name: Windows Server 2016 Standard Evaluation
@@ -79,9 +85,12 @@ Version: 10
 Build: 14393
 
 --------------------
+
 Runtime: freebsd
 Architecture: amd64
 OS Name: FreeBSD 12.1-RELEASE
 Version: 12.1-RELEASE
 Kernel: 1201000
+
+--------------------
 ```
