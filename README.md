@@ -1,7 +1,43 @@
 # osinfo
 
 ## What is osinfo?
-OSinfo is a cross-platform OS Version collection tool. 
+OSinfo is a cross-platform OS Version collection tool module. It is designed to unify OS detection methods in a single module that can easily be integrated into other projects. 
+
+### Offically Supported
+
+Windows Based: 
+- Windows Server 2016
+- Windows Server 2019
+- Windows 7
+- Windows 10
+
+Debian Linux Based:
+- Ubuntu
+- Debian
+- Kali Rolling
+- Parrot OS
+
+Red Hat Linux Based:
+- Fedora
+- CentOS
+- RHEL
+- Oracle
+
+OpenSUSE Linux Based:
+- Leap
+- TumbleWeed
+- SLES
+
+Arch Linux Based:
+- Arch
+- Manjaro
+
+Alpine Linux Based:
+- Alpine
+
+BSD Based:
+- FreeBSD
+
 
 ## Release Struct
 ```go
@@ -48,8 +84,6 @@ type DarwinRelease struct {
 
    func main() {
 		release := osinfo.GetVersion()
-    fmt.Println(release.Name)
-    fmt.Println(release.Version)
 		release.PrintInfo()
 	 }
 ```
@@ -72,7 +106,7 @@ Runtime: linux
 Architecture: amd64
 OS Name: Debian GNU/Linux 10 (buster)
 Version: 10
-Kernel: 5.11.2-arch1-1
+Kernel: 4.19.0-13-amd64
 Distro: debian
 Package Manager: apt
 
