@@ -1,7 +1,10 @@
 # osinfo
 
+[![Go Reference](https://pkg.go.dev/badge/github.com/JustinTimperio/osinfo.svg)](https://pkg.go.dev/github.com/JustinTimperio/osinfo)
+[![Go Report Card](https://goreportcard.com/badge/github.com/JustinTimperio/osinfo)](https://goreportcard.com/report/github.com/JustinTimperio/osinfo)
+
 ## What is osinfo?
-OSinfo is a cross-platform OS Version collection tool module. It is designed to unify OS detection methods in a single module that can easily be integrated into other projects. 
+OSinfo is a cross-platform OS Version collection tool. It is designed to unify multiple OS detection methods in a single module that can easily be integrated into other projects. 
 
 ### Offically Supported
 
