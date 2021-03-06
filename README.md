@@ -2,6 +2,8 @@
 
 [![Go Reference](https://pkg.go.dev/badge/github.com/JustinTimperio/osinfo.svg)](https://pkg.go.dev/github.com/JustinTimperio/osinfo)
 [![Go Report Card](https://goreportcard.com/badge/github.com/JustinTimperio/osinfo)](https://goreportcard.com/report/github.com/JustinTimperio/osinfo)
+![GitHub](https://img.shields.io/github/license/JustinTimperio/osinfo)
+[![Codacy Badge](https://app.codacy.com/project/badge/Grade/30b01ce21f514d46ab3d47b5c371fa38)](https://www.codacy.com/gh/JustinTimperio/osinfo/dashboard?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=JustinTimperio/osinfo&amp;utm_campaign=Badge_Grade)
 
 ## What is osinfo?
 OSinfo is a cross-platform OS Version collection tool. It is designed to unify multiple OS detection methods in a single module that can easily be integrated into other projects. 
@@ -9,38 +11,38 @@ OSinfo is a cross-platform OS Version collection tool. It is designed to unify m
 ### Offically Supported
 
 Windows Based: 
-- Windows Server 2016
-- Windows Server 2019
-- Windows 7
-- Windows 10
+  - Windows Server 2016
+  - Windows Server 2019
+  - Windows 7
+  - Windows 8
+  - Windows 10
 
 Debian Linux Based:
-- Ubuntu
-- Debian
-- Kali Rolling
-- Parrot OS
+  - Ubuntu
+  - Debian
+  - Kali Rolling
+  - Parrot OS
 
 Red Hat Linux Based:
-- Fedora
-- CentOS
-- RHEL
-- Oracle
+  - Fedora
+  - CentOS
+  - RHEL
+  - Oracle
 
 OpenSUSE Linux Based:
-- Leap
-- TumbleWeed
-- SLES
+  - Leap
+  - TumbleWeed
+  - SLES
 
 Arch Linux Based:
-- Arch
-- Manjaro
+  - Arch
+  - Manjaro
 
 Alpine Linux Based:
-- Alpine
+ - Alpine
 
 BSD Based:
-- FreeBSD
-
+  - FreeBSD
 
 ## Release Struct
 ```go
@@ -76,7 +78,7 @@ type darwinRelease struct {
 ```
 
 ## Example Usage
-1. Create`fetchinfo.go`
+ 1. Create`fetchinfo.go`
 ```go
    package main
 
@@ -89,12 +91,12 @@ type darwinRelease struct {
 		release.PrintInfo()
 	 }
 ```
-2. `go mod init`
-3. `go mod tidy`
-4. `go run fetchinfo.go`
+ 2. `go mod init`
+ 3. `go mod tidy`
+ 4. `go run fetchinfo.go`
 
 ## Example Outputs
-```
+```sh
 --------------------
 
 Runtime: linux
