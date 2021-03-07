@@ -1,8 +1,6 @@
 package osinfo
 
 import (
-	"io/ioutil"
-	"os"
 	"os/exec"
 	"regexp"
 	"runtime"
@@ -20,98 +18,87 @@ import (
 //		- r.nix.Kernel
 //		- r.nix.Distro
 //		- r.nix.PkgMng
-func GetVersion() *Release {
-
-	inf := &Release{
+func GetVersion() Release {
+	info := Release{
 		Runtime: runtime.GOOS,
 		Arch:    runtime.GOARCH,
+		Name:    "unknown",
+		Version: "unknown",
+
+		Linux: linuxRelease{
+			Distro:     "unknown",
+			Kernel:     "unknown",
+			PkgManager: "unknown",
+		},
 	}
 
-	out, _ := exec.Command("uname", "-r").Output()
-	kern := strings.ReplaceAll(strings.ReplaceAll(string(out), "\n", ""), "\"", "")
-	inf.nix.Kernel = string(kern)
+	out, err := exec.Command("uname", "-r").Output()
+	if err == nil {
+		info.Linux.Kernel = cleanString(string(out))
+	}
 
-	if pathExists("/etc/os-release") == true {
-		f := readFile("/etc/os-release")
+	if !pathExists("/etc/os-release") {
+		return info
+	}
 
-		var (
-			nameField  = regexp.MustCompile(`NAME=(.*?)\n|\nNAME=(.*?)\n`)
-			pnameField = regexp.MustCompile(`PRETTY_NAME=(.*?)\n|\nPRETTY_NAME=(.*?)\n`)
-			verField   = regexp.MustCompile(`VERSION_ID=(.*?)\n|\nVERSION_ID=(.*?)\n`)
+	var (
+		nameField  = regexp.MustCompile(`NAME=(.*?)\n|\nNAME=(.*?)\n`)
+		pnameField = regexp.MustCompile(`PRETTY_NAME=(.*?)\n|\nPRETTY_NAME=(.*?)\n`)
+		verField   = regexp.MustCompile(`VERSION_ID=(.*?)\n|\nVERSION_ID=(.*?)\n`)
+	)
 
-			suse   = regexp.MustCompile(`SLES|openSUSE`)
-			debian = regexp.MustCompile(`Debian|Ubuntu|Kali|Parrot|Mint`)
-			rhl    = regexp.MustCompile(`Red Hat|CentOS|Fedora|Oracle`)
-			arch   = regexp.MustCompile(`Arch|Manjaro`)
-			alpine = regexp.MustCompile(`Alpine`)
-		)
+	f := readFile("/etc/os-release")
+	var (
+		namef  = cleanString(nameField.FindString(f))
+		pnamef = cleanString(pnameField.FindString(f))
+		verf   = cleanString(verField.FindString(f))
+	)
 
-		namef := strings.TrimSpace(strings.ReplaceAll(strings.ReplaceAll(nameField.FindString(f), "\n", ""), "\"", ""))
-		pnamef := strings.TrimSpace(strings.ReplaceAll(strings.ReplaceAll(pnameField.FindString(f), "\n", ""), "\"", ""))
-		verf := strings.TrimSpace(strings.ReplaceAll(strings.ReplaceAll(verField.FindString(f), "\n", ""), "\"", ""))
+	if pnamef := strings.Split(pnamef, "="); len(pnamef) >= 2 {
+		info.Name = pnamef[1]
+	}
 
-		name := strings.Split(namef, "=")[1]
+	if verf := strings.Split(verf, "="); len(verf) >= 2 {
+		info.Version = verf[1]
+	}
 
-		if pnamef != "" {
-			inf.Name = strings.Split(pnamef, "=")[1]
-		} else {
-			inf.Name = "unknown"
-		}
+	var (
+		suse   = regexp.MustCompile(`SLES|openSUSE`)
+		debian = regexp.MustCompile(`Debian|Ubuntu|Kali|Parrot|Mint`)
+		rhl    = regexp.MustCompile(`Red Hat|CentOS|Fedora|Oracle`)
+		arch   = regexp.MustCompile(`Arch|Manjaro`)
+		alpine = regexp.MustCompile(`Alpine`)
+	)
 
-		if verf != "" {
-			inf.Version = strings.Split(verf, "=")[1]
-		} else {
-			inf.Version = "unknown"
-		}
-
-		if suse.MatchString(name) == true {
-			inf.nix.Distro = "opensuse"
-			inf.nix.PkgMng = "zypper"
-
-		} else if debian.MatchString(name) == true {
-			inf.nix.Distro = "debian"
-			inf.nix.PkgMng = "apt"
-
-		} else if rhl.MatchString(name) == true {
-			inf.nix.Distro = "fedora"
-			inf.nix.PkgMng = "yum"
-
-		} else if arch.MatchString(name) == true {
-			inf.Version = "rolling"
-			inf.nix.Distro = "arch"
-			inf.nix.PkgMng = "pacman"
-
-		} else if alpine.MatchString(name) == true {
-			inf.nix.Distro = "alpine"
-			inf.nix.PkgMng = "apk"
-
-		} else {
-			inf.nix.Distro = "unknown"
-			inf.nix.PkgMng = "unknown"
-		}
-
+	var name string
+	if namef := strings.Split(namef, "="); len(namef) >= 2 {
+		name = namef[1]
 	} else {
-		inf.Name = "unknown"
-		inf.Version = "unknown"
-		inf.nix.Distro = "unknown"
-		inf.nix.PkgMng = "unknown"
+		return info
 	}
-	return inf
-}
 
-func pathExists(name string) bool {
-	if _, err := os.Stat(name); err != nil {
-		if os.IsNotExist(err) {
-			return false
-		}
-	}
-	return true
-}
+	switch {
+	case suse.MatchString(name):
+		info.Linux.Distro = "opensuse"
+		info.Linux.PkgManager = "zypper"
 
-func readFile(filename string) string {
-	content, err := ioutil.ReadFile(filename)
-	if err != nil {
-		return ""
+	case debian.MatchString(name):
+		info.Linux.Distro = "debian"
+		info.Linux.PkgManager = "apt"
+
+	case rhl.MatchString(name):
+		info.Linux.Distro = "fedora"
+		info.Linux.PkgManager = "yum"
+
+	case arch.MatchString(name):
+		info.Version = "rolling"
+		info.Linux.Distro = "arch"
+		info.Linux.PkgManager = "pacman"
+
+	case alpine.MatchString(name):
+		info.Linux.Distro = "alpine"
+		info.Linux.PkgManager = "apk"
 	}
-	return string(content[:])
+
+	return info
 }

@@ -7,14 +7,14 @@ import (
 	"github.com/JustinTimperio/osinfo"
 )
 
-
 func TestMain(m *testing.M) {
-	x := osinfo.GetVersion()
+	info := osinfo.GetVersion()
 	fmt.Println("-------------")
-	fmt.Println(x.Arch)
-	fmt.Println(x.Runtime)
-	fmt.Println(x.Name)
-	fmt.Println(x.Version)
+	fmt.Println(info.Arch)
+	fmt.Println(info.Runtime)
+	fmt.Println(info.Name)
+	fmt.Println(info.Version)
 	fmt.Println("-------------")
-	x.PrintInfo()
+
+	fmt.Println(info)
 }
