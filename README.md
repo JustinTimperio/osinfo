@@ -22,7 +22,7 @@ OSinfo is a cross-platform OS Version collection tool. It is designed to unify m
 |                     | 17 - High Sierra   | OpenSUSE TumbleWeed |         |                 |        |
 |                     | 18 - Mojave        | OpenSUSE SLES       |         |                 |        |
 |                     | 19 - Catalina      | Arch                |         |                 |        |
-|                     | 18 - Big Sur       | Manjaro             |         |                 |        |
+|                     | 20 - Big Sur       | Manjaro             |         |                 |        |
 |                     |                    | Alpine              |         |                 |        |
 |                     |                    | Fedora              |         |                 |        |
 |                     |                    | RHEL                |         |                 |        |

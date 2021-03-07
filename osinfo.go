@@ -17,7 +17,6 @@ type Release struct {
 	Windows windowsRelease
 	Linux   linuxRelease
 	BSD     bsdRelease
-	MacOS   darwinRelease
 }
 
 type windowsRelease struct {
@@ -35,10 +34,6 @@ type bsdRelease struct {
 	PkgManager string
 }
 
-type darwinRelease struct {
-	Kernel string
-}
-
 func (r *Release) String() string {
 	b := bytes.NewBuffer(nil)
 
@@ -52,12 +47,12 @@ func (r *Release) String() string {
 		fmt.Fprintln(b, "Build Number:", r.Windows.Build)
 	case "freebsd":
 		fmt.Fprintln(b, "Kernel:", r.BSD.Kernel)
+	case "openbsd":
+		fmt.Fprintln(b, "Kernel:", r.BSD.Kernel)
 	case "linux":
 		fmt.Fprintln(b, "Kernel:", r.Linux.Kernel)
 		fmt.Fprintln(b, "Distro:", r.Linux.Distro)
 		fmt.Fprintln(b, "Package Manager:", r.Linux.PkgManager)
-	case "darwin":
-		fmt.Fprintln(b, "Kernel:", r.MacOS.Kernel)
 	}
 
 	return b.String()
