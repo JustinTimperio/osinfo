@@ -3,7 +3,6 @@ package osinfo
 import (
 	"os/exec"
 	"runtime"
-	"strings"
 )
 
 // GetVersion FreeBSD returns version info
@@ -15,23 +14,32 @@ import (
 //		- r.Name
 //		- r.Version
 //		- r.bsd.Kernel
-func GetVersion() *Release {
-
-	inf := &Release{
+func GetVersion() Release {
+	info := Release{
 		Runtime: runtime.GOOS,
 		Arch:    runtime.GOARCH,
+		Name:    "unknown",
+		Version: "unknown",
+		BSD: bsdRelease{
+			Kernel:     "unknown",
+			PkgManager: "pkg",
+		},
 	}
 
-	fullName, _ := exec.Command("uname", "-or").Output()
-	inf.Name = strings.TrimSpace(strings.ReplaceAll(strings.ReplaceAll(string(fullName), "\n", ""), "\"", ""))
+	fullName, err := exec.Command("uname", "-or").Output()
+	if err == nil {
+		info.Name = cleanString(string(fullName))
+	}
 
-	version, _ := exec.Command("uname", "-r").Output()
-	inf.Version = strings.TrimSpace(strings.ReplaceAll(strings.ReplaceAll(string(version), "\n", ""), "\"", ""))
+	version, err := exec.Command("uname", "-r").Output()
+	if err == nil {
+		info.Version = cleanString(string(version))
+	}
 
 	kernel, _ := exec.Command("uname", "-K").Output()
-	inf.bsd.Kernel = strings.TrimSpace(strings.ReplaceAll(strings.ReplaceAll(string(kernel), "\n", ""), "\"", ""))
+	if err == nil {
+		info.BSD.Kernel = cleanString(string(kernel))
+	}
 
-	inf.bsd.PkgMng = "pkg"
-
-	return inf
+	return info
 }

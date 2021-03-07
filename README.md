@@ -8,7 +8,7 @@
 ## What is osinfo?
 OSinfo is a cross-platform OS Version collection tool. It is designed to unify multiple OS detection methods in a single module that can easily be integrated into other projects. 
 
-### Offically Supported:
+### Officially Supported:
 
 | Windows             | MacOS              | Linux               | BSD     | Android         | IOS    |
 |---------------------|--------------------|---------------------|---------|-----------------|--------|
@@ -29,38 +29,6 @@ OSinfo is a cross-platform OS Version collection tool. It is designed to unify m
 |                     |                    | CentOS              |         |                 |        |
 |                     |                    | Oracle              |         |                 |        |
 
-## Release Struct
-```go
-type Release struct {
-	Runtime string
-	Arch    string
-	Name    string
-	Version string
-	win     WindowsRelease
-	nix     LinuxRelease
-	bsd     BSDRelease
-	osx     DarwinRelease
-}
-
-type windowsRelease struct {
-	Build string
-}
-
-type linuxRelease struct {
-	Distro string
-	Kernel string
-	PkgMng string
-}
-
-type bsdRelease struct {
-	Kernel string
-	PkgMng string
-}
-
-type darwinRelease struct {
-	Kernel string
-}
-```
 
 ## Example Usage
  1. Create`fetchinfo.go`

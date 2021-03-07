@@ -1,7 +1,11 @@
 package osinfo
 
 import (
+	"bytes"
 	"fmt"
+	"io/ioutil"
+	"os"
+	"strings"
 )
 
 // Release contains all the
@@ -10,10 +14,10 @@ type Release struct {
 	Arch    string
 	Name    string
 	Version string
-	win     windowsRelease
-	nix     linuxRelease
-	bsd     bsdRelease
-	osx     darwinRelease
+	Windows windowsRelease
+	Linux   linuxRelease
+	BSD     bsdRelease
+	MacOS   darwinRelease
 }
 
 type windowsRelease struct {
@@ -21,40 +25,57 @@ type windowsRelease struct {
 }
 
 type linuxRelease struct {
-	Distro string
-	Kernel string
-	PkgMng string
+	Distro     string
+	Kernel     string
+	PkgManager string
 }
 
 type bsdRelease struct {
-	Kernel string
-	PkgMng string
+	Kernel     string
+	PkgManager string
 }
 
 type darwinRelease struct {
 	Kernel string
 }
 
-// PrintInfo prints all the fields in a release struct
-func (i *Release) PrintInfo() {
+func (r *Release) String() string {
+	b := bytes.NewBuffer(nil)
 
-	fmt.Println("Runtime:", i.Runtime)
-	fmt.Println("Architecture:", i.Arch)
-	fmt.Println("OS Name:", i.Name)
-	fmt.Println("Version:", i.Version)
+	fmt.Fprintln(b, "Runtime:", r.Runtime)
+	fmt.Fprintln(b, "Architecture:", r.Arch)
+	fmt.Fprintln(b, "OS Name:", r.Name)
+	fmt.Fprintln(b, "Version:", r.Version)
 
-	if i.Runtime == "freebsd" {
-		fmt.Println("Kernel:", i.bsd.Kernel)
-
-	} else if i.Runtime == "linux" {
-		fmt.Println("Kernel:", i.nix.Kernel)
-		fmt.Println("Distro:", i.nix.Distro)
-		fmt.Println("Package Manager:", i.nix.PkgMng)
-
-	} else if i.Runtime == "darwin" {
-		fmt.Println("Kernel:", i.osx.Kernel)
-
-	} else if i.Runtime == "windows" {
-		fmt.Println("Build Number:", i.win.Build)
+	switch r.Runtime {
+	case "windows":
+		fmt.Fprintln(b, "Build Number:", r.Windows.Build)
+	case "freebsd":
+		fmt.Fprintln(b, "Kernel:", r.BSD.Kernel)
+	case "linux":
+		fmt.Fprintln(b, "Kernel:", r.Linux.Kernel)
+		fmt.Fprintln(b, "Distro:", r.Linux.Distro)
+		fmt.Fprintln(b, "Package Manager:", r.Linux.PkgManager)
+	case "darwin":
+		fmt.Fprintln(b, "Kernel:", r.MacOS.Kernel)
 	}
+
+	return b.String()
+}
+
+func cleanString(s string) string {
+	s = strings.ReplaceAll(s, "\n", "")
+	s = strings.ReplaceAll(s, `"`, ``)
+
+	return strings.TrimSpace(s)
+}
+
+func pathExists(name string) bool {
+	_, err := os.Stat(name)
+	return err == nil
+}
+
+func readFile(filename string) string {
+	content, _ := ioutil.ReadFile(filename)
+	return string(content)
 }
