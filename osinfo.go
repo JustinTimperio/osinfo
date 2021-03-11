@@ -14,24 +14,29 @@ type Release struct {
 	Arch    string
 	Name    string
 	Version string
-	Windows windowsRelease
-	Linux   linuxRelease
-	BSD     bsdRelease
+	Windows WindowsRelease
+	Linux   LinuxRelease
+	BSD     BsdRelease
+	MacOs   MacOsRelease
 }
 
-type windowsRelease struct {
+type WindowsRelease struct {
 	Build string
 }
 
-type linuxRelease struct {
+type LinuxRelease struct {
 	Distro     string
 	Kernel     string
 	PkgManager string
 }
 
-type bsdRelease struct {
+type BsdRelease struct {
 	Kernel     string
 	PkgManager string
+}
+
+type MacOsRelease struct {
+	VersionName string
 }
 
 func (r *Release) String() string {

@@ -8,7 +8,7 @@ import (
 
 // GetVersion Darwin returns version info
 // fetching info for this os is fairly simple
-// version information is all fetched via `uname`
+// version information is all fetched via `sw_vers`
 // Returns:
 //		- r.Runtime
 //		- r.Arch
@@ -19,51 +19,47 @@ func GetVersion() Release {
 	info := Release{
 		Runtime: runtime.GOOS,
 		Arch:    runtime.GOARCH,
-		Name:    "unknown",
+		Name:    "Mac OS X",
 		Version: "unknown",
 	}
 
-	version, err := exec.Command("uname", "-r").Output()
+	version, err := exec.Command("sw_vers").Output()
 	if err == nil {
-		info.Version = cleanString(string(version))
+		str := strings.Split(string(version), "\n")
+		for _, s := range str {
+			if strings.HasPrefix(s, "ProductVersion:\t") {
+				info.Version = strings.TrimPrefix(s, "ProductVersion:\t")
+			}
+		}
 	}
 
-	if strings.HasPrefix(version, "10") {
-		info.Name = "MacOS: Snow Leopard"
-
-	} else if strings.HasPrefix(version, "11") {
-		info.Name = "MacOS: Lion"
-
-	} else if strings.HasPrefix(version, "12") {
-		info.Name = "MacOS: Mountain Lion"
-
-	} else if strings.HasPrefix(version, "13") {
-		info.Name = "MacOS: Mavericks"
-
-	} else if strings.HasPrefix(version, "14") {
-		info.Name = "MacOS: Yosemite"
-
-	} else if strings.HasPrefix(version, "15") {
-		info.Name = "MacOS: El Capitan"
-
-	} else if strings.HasPrefix(version, "16") {
-		info.Name = "MacOS: Sierra"
-
-	} else if strings.HasPrefix(version, "17") {
-		info.Name = "MacOS: High Sierra"
-
-	} else if strings.HasPrefix(version, "18") {
-		info.Name = "MacOS: Mojave"
-
-	} else if strings.HasPrefix(version, "19") {
-		info.Name = "MacOS: Catalina"
-
-	} else if strings.HasPrefix(version, "20") {
-		info.Name = "MacOS: Big Sur"
-
-	} else {
-		info.Name = "MacOS: Unknown Version"
+	var name string
+	switch idx := strings.LastIndex(info.Version, "."); info.Version[0:idx] {
+	case "10.6":
+		name = "MacOS: Snow Leopard"
+	case "10.7":
+		name = "MacOS: Lion"
+	case "10.8":
+		name = "MacOS: Mountain Lion"
+	case "10.9":
+		name = "MacOS: Mavericks"
+	case "10.10":
+		name = "MacOS: Yosemite"
+	case "10.11":
+		name = "MacOS: El Capitan"
+	case "10.12":
+		name = "MacOS: Sierra"
+	case "10.13":
+		name = "MacOS: High Sierra"
+	case "10.14":
+		name = "MacOS: Mojave"
+	case "10.15":
+		name = "MacOS: Catalina"
+	case "11.0":
+		name = "MacOS: Big Sur"
 	}
-
+	info.MacOs = MacOsRelease{
+		VersionName: name,
+	}
 	return info
 }
