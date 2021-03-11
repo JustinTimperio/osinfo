@@ -8,7 +8,7 @@ import (
 
 // GetVersion Darwin returns version info
 // fetching info for this os is fairly simple
-// version information is all fetched via `uname`
+// version information is all fetched via `sw_vers`
 // Returns:
 //		- r.Runtime
 //		- r.Arch
@@ -23,47 +23,41 @@ func GetVersion() Release {
 		Version: "unknown",
 	}
 
-	version, err := exec.Command("uname", "-r").Output()
+	version, err := exec.Command("sw_vers").Output()
 	if err == nil {
-		info.Version = cleanString(string(version))
+		str := strings.Split(string(version), "\n")
+		for _, s := range str {
+			if strings.HasPrefix(s, "ProductVersion:\t") {
+				info.Version = strings.TrimPrefix(s, "ProductVersion:\t")
+			}
+		}
 	}
 
-	if strings.HasPrefix(version, "10") {
+	switch idx := strings.LastIndex(info.Version, "."); info.Version[0:idx] {
+	case "10.6":
 		info.Name = "MacOS: Snow Leopard"
-
-	} else if strings.HasPrefix(version, "11") {
+	case "10.7":
 		info.Name = "MacOS: Lion"
-
-	} else if strings.HasPrefix(version, "12") {
+	case "10.8":
 		info.Name = "MacOS: Mountain Lion"
-
-	} else if strings.HasPrefix(version, "13") {
+	case "10.9":
 		info.Name = "MacOS: Mavericks"
-
-	} else if strings.HasPrefix(version, "14") {
+	case "10.10":
 		info.Name = "MacOS: Yosemite"
-
-	} else if strings.HasPrefix(version, "15") {
+	case "10.11":
 		info.Name = "MacOS: El Capitan"
-
-	} else if strings.HasPrefix(version, "16") {
+	case "10.12":
 		info.Name = "MacOS: Sierra"
-
-	} else if strings.HasPrefix(version, "17") {
+	case "10.13":
 		info.Name = "MacOS: High Sierra"
-
-	} else if strings.HasPrefix(version, "18") {
+	case "10.14":
 		info.Name = "MacOS: Mojave"
-
-	} else if strings.HasPrefix(version, "19") {
+	case "10.15":
 		info.Name = "MacOS: Catalina"
-
-	} else if strings.HasPrefix(version, "20") {
+	case "11.0":
 		info.Name = "MacOS: Big Sur"
-
-	} else {
+	default:
 		info.Name = "MacOS: Unknown Version"
 	}
-
 	return info
 }
