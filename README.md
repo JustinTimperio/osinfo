@@ -86,7 +86,7 @@ Runtime: darwin
 Architecture: amd64
 OS Name: Mac OS X
 Version: 11.0.1
-VersionName: MacOS: Big Sur 
+Version Name: MacOS - Big Sur 
 
 --------------------
 
