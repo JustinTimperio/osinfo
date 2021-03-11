@@ -13,8 +13,8 @@ import (
 //		- r.Arch
 //		- r.Name
 //		- r.Version
-//		- r.bsd.Kernel
-//		- r.bsd.PkgManager
+//		- r.BSD.Kernel
+//		- r.BSD.PkgManager
 func GetVersion() Release {
 	info := Release{
 		Runtime: runtime.GOOS,

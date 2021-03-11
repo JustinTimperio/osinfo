@@ -15,7 +15,6 @@ func TestMain(m *testing.M) {
 	fmt.Println(info.Name)
 	fmt.Println(info.Version)
 	fmt.Println("-------------")
-
 	fmt.Printf(info.String())
 	fmt.Println("-------------")
 }

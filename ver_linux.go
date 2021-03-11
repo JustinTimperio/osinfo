@@ -15,9 +15,9 @@ import (
 //		- r.Arch
 //		- r.Name
 //		- r.Version
-//		- r.nix.Kernel
-//		- r.nix.Distro
-//		- r.nix.PkgMng
+//		- r.Linux.Kernel
+//		- r.Linux.Distro
+//		- r.Linux.PkgMng
 func GetVersion() Release {
 	info := Release{
 		Runtime: runtime.GOOS,
