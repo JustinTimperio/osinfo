@@ -25,7 +25,7 @@ func GetVersion() Release {
 		Name:    "unknown",
 		Version: "unknown",
 
-		Linux: linuxRelease{
+		Linux: LinuxRelease{
 			Distro:     "unknown",
 			Kernel:     "unknown",
 			PkgManager: "unknown",

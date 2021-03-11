@@ -20,7 +20,7 @@ func GetVersion() Release {
 		Arch:    runtime.GOARCH,
 		Name:    "unknown",
 		Version: "unknown",
-		BSD: bsdRelease{
+		BSD: BsdRelease{
 			Kernel:     "unknown",
 			PkgManager: "pkg",
 		},

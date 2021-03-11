@@ -22,7 +22,7 @@ func GetVersion() Release {
 		Arch:    runtime.GOARCH,
 		Name:    "unknown",
 		Version: "unknown",
-		Windows: windowsRelease{
+		Windows: WindowsRelease{
 			Build: "unknown",
 		},
 	}
