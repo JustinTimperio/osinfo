@@ -36,12 +36,14 @@ OSinfo is a cross-platform OS Version collection tool. It is designed to unify m
    package main
 
    import (
-	   "github.com/JustinTimperio/osinfo"
+   	    "fmt"
+   	    
+	    "github.com/JustinTimperio/osinfo"
    )
 
    func main() {
 		release := osinfo.GetVersion()
-		release.PrintInfo()
+		fmt.Printf(release.String())
 	 }
 ```
  2. `go mod init`
