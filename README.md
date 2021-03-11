@@ -10,24 +10,24 @@ OSinfo is a cross-platform OS Version collection tool. It is designed to unify m
 
 ### Officially Supported:
 
-| Windows             | MacOS              | Linux               | BSD     |
-|---------------------|--------------------|---------------------|---------|
-| Windows Server 2012 | 10 - Snow Leopard  | Ubuntu              | FreeBSD | 
-| Windows Server 2016 | 11 - Lion          | Debian              | OpenBSD | 
-| Windows Server 2019 | 12 - Mountain Lion | MXLinux             |         | 
-| Windows 7           | 13 - Mavericks     | Mint                |         | 
-| Windows 8           | 14 - Yosemite      | Kali                |         | 
-| Windows 10          | 15 - El Capitan    | ParrotOS            |         |
-|                     | 16 - Sierra        | OpenSUSE Leap       |         | 
-|                     | 17 - High Sierra   | OpenSUSE TumbleWeed |         |
-|                     | 18 - Mojave        | OpenSUSE SLES       |         |
-|                     | 19 - Catalina      | Arch                |         |
-|                     | 20 - Big Sur       | Manjaro             |         |
-|                     |                    | Alpine              |         |
-|                     |                    | Fedora              |         |
-|                     |                    | RHEL                |         |
-|                     |                    | CentOS              |         |
-|                     |                    | Oracle              |         |
+| Windows             | MacOS                 | Linux               | BSD     |
+|---------------------|-----------------------|---------------------|---------|
+| Windows Server 2012 | 10.6  - Snow Leopard  | Ubuntu              | FreeBSD | 
+| Windows Server 2016 | 10.7  - Lion          | Debian              | OpenBSD | 
+| Windows Server 2019 | 10.8  - Mountain Lion | MXLinux             |         | 
+| Windows 7           | 10.9  - Mavericks     | Mint                |         | 
+| Windows 8           | 10.10 - Yosemite      | Kali                |         | 
+| Windows 10          | 10.11 - El Capitan    | ParrotOS            |         |
+|                     | 10.12 - Sierra        | OpenSUSE Leap       |         | 
+|                     | 10.13 - High Sierra   | OpenSUSE TumbleWeed |         |
+|                     | 10.14 - Mojave        | OpenSUSE SLES       |         |
+|                     | 10.15 - Catalina      | Arch                |         |
+|                     | 11.0  - Big Sur       | Manjaro             |         |
+|                     |                       | Alpine              |         |
+|                     |                       | Fedora              |         |
+|                     |                       | RHEL                |         |
+|                     |                       | CentOS              |         |
+|                     |                       | Oracle              |         |
 
 
 ## Example Usage
@@ -85,6 +85,13 @@ Architecture: amd64
 OS Name: FreeBSD 12.1-RELEASE
 Version: 12.1-RELEASE
 Kernel: 1201000
+
+--------------------
+
+Runtime: darwin
+Architecture: amd64
+OS Name: MacOS: Big Sur
+Version: 11.0.1
 
 --------------------
 ```
