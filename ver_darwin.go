@@ -14,13 +14,17 @@ import (
 //		- r.Arch
 //		- r.Name
 //		- r.Version
-//		- r.bsd.Kernel
+//		- r.Mac.VersionName
 func GetVersion() Release {
 	info := Release{
 		Runtime: runtime.GOOS,
 		Arch:    runtime.GOARCH,
 		Name:    "Mac OS X",
 		Version: "unknown",
+
+		MacOs: macOsRelease{
+			VersionName: "unknown",
+		},
 	}
 
 	version, err := exec.Command("sw_vers").Output()
@@ -36,29 +40,29 @@ func GetVersion() Release {
 	var name string
 	switch idx := strings.LastIndex(info.Version, "."); info.Version[0:idx] {
 	case "10.6":
-		name = "MacOS: Snow Leopard"
+		name = "MacOS - Snow Leopard"
 	case "10.7":
-		name = "MacOS: Lion"
+		name = "MacOS - Lion"
 	case "10.8":
-		name = "MacOS: Mountain Lion"
+		name = "MacOS - Mountain Lion"
 	case "10.9":
-		name = "MacOS: Mavericks"
+		name = "MacOS - Mavericks"
 	case "10.10":
-		name = "MacOS: Yosemite"
+		name = "MacOS - Yosemite"
 	case "10.11":
-		name = "MacOS: El Capitan"
+		name = "MacOS - El Capitan"
 	case "10.12":
-		name = "MacOS: Sierra"
+		name = "MacOS - Sierra"
 	case "10.13":
-		name = "MacOS: High Sierra"
+		name = "MacOS - High Sierra"
 	case "10.14":
-		name = "MacOS: Mojave"
+		name = "MacOS - Mojave"
 	case "10.15":
-		name = "MacOS: Catalina"
+		name = "MacOS - Catalina"
 	case "11.0":
-		name = "MacOS: Big Sur"
+		name = "MacOS - Big Sur"
 	}
-	info.MacOs = MacOsRelease{
+	info.MacOs = macOsRelease{
 		VersionName: name,
 	}
 	return info

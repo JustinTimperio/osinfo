@@ -31,14 +31,14 @@ OSinfo is a cross-platform OS Version collection tool. It is designed to unify m
 
 
 ## Example Usage
- 1. Create`fetchinfo.go`
+ 1. Create `fetchinfo.go`
 ```go
    package main
 
    import (
-   	    "fmt"
-   	    
-	    "github.com/JustinTimperio/osinfo"
+      "fmt"
+
+      "github.com/JustinTimperio/osinfo"
    )
 
    func main() {
@@ -82,18 +82,29 @@ Build: 14393
 
 --------------------
 
+Runtime: darwin
+Architecture: amd64
+OS Name: Mac OS X
+Version: 11.0.1
+VersionName: MacOS: Big Sur 
+
+--------------------
+
 Runtime: freebsd
 Architecture: amd64
 OS Name: FreeBSD 12.1-RELEASE
 Version: 12.1-RELEASE
 Kernel: 1201000
+Package Manger: pkg
 
 --------------------
 
-Runtime: darwin
+Runtime: openbsd 
 Architecture: amd64
-OS Name: MacOS: Big Sur
-Version: 11.0.1
+OS Name: OpenBSD 6.7 
+Version: 6.7 
+Kernel: GENERIC.MP#182 
+Package Manger: pkg_add
 
 --------------------
 ```

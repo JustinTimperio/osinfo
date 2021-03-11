@@ -15,40 +15,39 @@ import (
 //		- r.Arch
 //		- r.Name
 //		- r.Version
-//		- r.win.Build
+//		- r.Windows.Build
 func GetVersion() Release {
-	inf := Release{
+	info := Release{
 		Runtime: runtime.GOOS,
 		Arch:    runtime.GOARCH,
 		Name:    "unknown",
 		Version: "unknown",
-		Windows: WindowsRelease{
+
+		Windows: windowsRelease{
 			Build: "unknown",
 		},
 	}
 
 	k, err := registry.OpenKey(registry.LOCAL_MACHINE, `SOFTWARE\Microsoft\Windows NT\CurrentVersion`, registry.QUERY_VALUE)
 	if err != nil {
-		return inf
+		return info
 	}
-
 	defer k.Close()
 
-	// extract info
 	pname, _, err := k.GetStringValue("ProductName")
 	if err == nil {
-		inf.Name = pname
+		info.Name = pname
 	}
 
 	ver, _, err := k.GetIntegerValue("CurrentMajorVersionNumber")
 	if err == nil {
-		inf.Version = strconv.Itoa(int(ver))
+		info.Version = strconv.Itoa(int(ver))
 	}
 
 	build, _, err := k.GetStringValue("CurrentBuild")
 	if err == nil {
-		inf.Windows.Build = build
+		info.Windows.Build = build
 	}
 
-	return inf
+	return info
 }

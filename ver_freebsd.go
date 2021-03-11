@@ -14,13 +14,15 @@ import (
 //		- r.Name
 //		- r.Version
 //		- r.bsd.Kernel
+//		- r.bsd.PkgManager
 func GetVersion() Release {
 	info := Release{
 		Runtime: runtime.GOOS,
 		Arch:    runtime.GOARCH,
 		Name:    "unknown",
 		Version: "unknown",
-		BSD: BsdRelease{
+
+		BSD: bsdRelease{
 			Kernel:     "unknown",
 			PkgManager: "pkg",
 		},

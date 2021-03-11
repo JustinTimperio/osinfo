@@ -8,37 +8,42 @@ import (
 	"strings"
 )
 
-// Release contains all the
+// Release contains all the info about os in nested structs
+// All values in the top level of the struct are guaranteed
+// in the sense that they are always returned.
+// Nested structs are only populated for the os they are compiled for
+// IE: Release.Windows will only have values if you are on windows
 type Release struct {
 	Runtime string
 	Arch    string
 	Name    string
 	Version string
-	Windows WindowsRelease
-	Linux   LinuxRelease
-	BSD     BsdRelease
-	MacOs   MacOsRelease
+	Windows windowsRelease
+	Linux   linuxRelease
+	BSD     bsdRelease
+	MacOs   macOsRelease
 }
 
-type WindowsRelease struct {
+type windowsRelease struct {
 	Build string
 }
 
-type LinuxRelease struct {
+type linuxRelease struct {
 	Distro     string
 	Kernel     string
 	PkgManager string
 }
 
-type BsdRelease struct {
+type bsdRelease struct {
 	Kernel     string
 	PkgManager string
 }
 
-type MacOsRelease struct {
+type macOsRelease struct {
 	VersionName string
 }
 
+// Provides a preformated print for every support OS
 func (r *Release) String() string {
 	b := bytes.NewBuffer(nil)
 
