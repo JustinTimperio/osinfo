@@ -3,7 +3,7 @@
 ![GitHub](https://img.shields.io/github/license/JustinTimperio/osinfo)
 [![Go Reference](https://pkg.go.dev/badge/github.com/JustinTimperio/osinfo.svg)](https://pkg.go.dev/github.com/JustinTimperio/osinfo)
 [![Go Report Card](https://goreportcard.com/badge/github.com/JustinTimperio/osinfo)](https://goreportcard.com/report/github.com/JustinTimperio/osinfo)
-[![Codacy Badge](https://app.codacy.com/project/badge/Grade/30b01ce21f514d46ab3d47b5c371fa38)](https://www.codacy.com/gh/JustinTimperio/osinfo/dashboard?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=JustinTimperio/osinfo&amp;utm_campaign=Badge_Grade)
+[![Codacy Badge](https://app.codacy.com/project/badge/Grade/180976560a9b46678d9d67053c0d7fc9)](https://www.codacy.com/gh/JustinTimperio/osinfo/dashboard?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=JustinTimperio/osinfo&amp;utm_campaign=Badge_Grade)
 
 ## What is osinfo?
 OSinfo is a cross-platform OS Version collection tool. It is designed to unify multiple OS detection methods in a single module that can easily be integrated into other projects. 
